@@ -13,11 +13,22 @@ java -jar target/spring-custom-metric-prometheus-0.1-SNAPSHOT.jar
 
 ```
 wget localhost:8080/exceptioncounter
-wget localhost:8080/prometheus
-cat prometheus
-# HELP exception_counter exception count of this app.
-# TYPE exception_counter counter
-exception_counter{errorcode="EXCEPTION__103",} 1.0
-exception_counter{errorcode="EXCEPTION__101",} 1.0
-exception_counter{errorcode="EXCEPTION__102",} 1.0
+wget localhost:8080/exceptioncounter
+wget localhost:8080/exceptioncounter
+wget localhost:8080/actuator/metrics
+cat metrics
+# HELP exception_count exception
+# TYPE exception_count gauge
+exception_count{errorcode="EXCEPTION__101",errormessage="exception 1",} 3.0
+exception_count{errorcode="EXCEPTION__102",errormessage="exception 2",} 3.0
+exception_count{errorcode="EXCEPTION__103",errormessage="exception 3",} 3.0
+
+sleep 100
+wget localhost:8080/actuator/metrics
+cat metrics
+# HELP exception_count exception
+# TYPE exception_count gauge
+exception_count{errorcode="EXCEPTION__101",errormessage="exception 1",} 0.0
+exception_count{errorcode="EXCEPTION__102",errormessage="exception 2",} 0.0
+exception_count{errorcode="EXCEPTION__103",errormessage="exception 3",} 0.0
 ```

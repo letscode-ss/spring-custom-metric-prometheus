@@ -4,14 +4,8 @@ import io.prometheus.client.Gauge;
 
 import io.prometheus.client.CollectorRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Component;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
 import java.util.Map;
 import java.util.HashMap;
@@ -38,11 +32,10 @@ public class PrometheusUtil {
         }
     }
 
-    @Scheduled(fixedRate = 10000)
+    //Gauge will be reset after 100 sec
+    @Scheduled(fixedRate = 100000)
     public void resetGauge() {
-        System.out.println(mymap.toString());
         mymap.forEach((code, msg) -> {
-            System.out.println(code.toString());
             exceptionGauge.labels(code.toString(),msg.toString()).set(0);
         });
     }
