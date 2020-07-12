@@ -1,16 +1,6 @@
 #spring-custom-metric-prometheus
-This repo have example of how to add counter with java exceptions and publish it to prometheus. (metrics for error rate)
+This repo have example of how to add counter with java exceptions and publish it to prometheus
 
-
-### spring-1-counter
-
-This project will use spring 1.5 to generate counter for application exception.
-
-### spring-2-counter
-This project will use spring 2 to generate counter for application exception.
-
-### spring-2-gauge
-This project will use spring 2 to generate metrics for exception for some duration.
 
 ### compile and run app
 
